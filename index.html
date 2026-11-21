@@ -817,10 +817,40 @@ sb.addEventListener('click', () => { S.init(); S.on = !S.on; sb.classList.toggle
 
 if (store.get('done')) $('#skipBtn').hidden = false;
 $('#startBtn').addEventListener('click', () => {
+  enableMotion();   // 必須在點擊當下要權限（iPhone 會跳出「動作與方向」的詢問）
   S.init(); S.bgmStart(); buzz(8); app.classList.add('started'); setStage('shake');
-  setTimeout(() => { caption('先搖搖看？'); hint('點一下盒子', 'tap'); hop(); }, 650);
+  setTimeout(() => { shakePrompt(); hop(); }, 650);
   armNudge();
 });
+
+/* 真的搖手機 → 搖盒子 */
+const TOUCH = matchMedia('(pointer: coarse)').matches;
+let motionOn = false, lastShake = 0, lastG = null;
+function shakePrompt(){
+  if (stage !== 'shake' || shakes > 0) return;
+  if (motionOn && TOUCH) { caption('搖一搖手機看看？'); hint('搖手機，或點一下盒子', 'tap'); }
+  else { caption('先搖搖看？'); hint('點一下盒子', 'tap'); }
+}
+function enableMotion(){
+  const DME = window.DeviceMotionEvent;
+  if (!DME || !TOUCH) return;
+  const go = () => { if (motionOn) return; motionOn = true; addEventListener('devicemotion', onMotion); shakePrompt(); };
+  if (typeof DME.requestPermission === 'function') DME.requestPermission().then(s => { if (s === 'granted') go(); }).catch(() => {});
+  else go();
+}
+function onMotion(e){
+  if (stage !== 'shake') return;
+  let m = 0;
+  const a = e.acceleration;
+  if (a && a.x != null) m = Math.hypot(a.x, a.y, a.z);
+  else {
+    const g = e.accelerationIncludingGravity; if (!g || g.x == null) return;
+    if (lastG) m = Math.hypot(g.x - lastG.x, g.y - lastG.y, g.z - lastG.z);
+    lastG = { x:g.x, y:g.y, z:g.z };
+  }
+  const now = performance.now();
+  if (m > 13 && now - lastShake > 700) { lastShake = now; shake(); }
+}
 $('#skipBtn').addEventListener('click', () => { S.init(); S.bgmStart(); app.classList.add('started'); stage3d.hidden = true; hit.hidden = true; showTicket(true); });
 
 /* 一次輕跳：提示裡面有東西，不循環 */
@@ -843,7 +873,7 @@ function shake(){
   ], { duration:540, easing:'ease-out' });
   if (shakes < SHAKE.length) caption(SHAKE[shakes]);
   shakes++;
-  if (shakes === 1) hint('再點幾下，或往下拉緞帶', 'down');
+  if (shakes === 1) hint(motionOn && TOUCH ? '再搖幾下，或往下拉緞帶' : '再點幾下，或往下拉緞帶', 'down');
   if (shakes === SHAKE.length) setTimeout(() => { if (stage === 'shake') { caption('好啦，別搖了，拆吧'); hint('往下拉緞帶', 'down'); } }, 1700);
 }
 
