@@ -199,11 +199,11 @@ button:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 .ended .cal-ctrl,.last .cal-ctrl{opacity:0;pointer-events:none}
 
 /* ---------- ticket ---------- */
-.tk-stage{position:absolute;inset:0;z-index:30;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;display:flex;flex-direction:column;align-items:center;gap:24px;padding-block:calc(env(safe-area-inset-top,0px) + 80px) calc(env(safe-area-inset-bottom,0px) + 40px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.tk-stage{position:absolute;inset:0;z-index:30;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;display:flex;flex-direction:column;align-items:center;gap:20px;padding-block:calc(env(safe-area-inset-top,0px) + 64px) calc(env(safe-area-inset-bottom,0px) + 20px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .tk-stage.behind{z-index:11}
-.ticket{position:relative;flex:none;width:min(100%,360px);filter:drop-shadow(0 16px 22px rgba(25,18,10,.36)) drop-shadow(0 1px 2px rgba(25,18,10,.18))}
+.ticket{position:relative;flex:none;width:min(100%,360px);transform-origin:50% 0;transition:transform .7s var(--ease),margin-bottom .7s var(--ease);filter:drop-shadow(0 16px 22px rgba(25,18,10,.36)) drop-shadow(0 1px 2px rgba(25,18,10,.18))}
 .tk-main{background:var(--paper);padding:12px 12px 0;border-radius:4px 4px 0 0}
-.tk-photo{position:relative;margin:0;aspect-ratio:4/3;max-width:100%;overflow:hidden;background:#e9e5de;border-radius:2px}
+.tk-photo{position:relative;margin:0;aspect-ratio:16/10;max-width:100%;overflow:hidden;background:#e9e5de;border-radius:2px}
 .tk-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 56%}
 .tk-photo figcaption{position:absolute;left:8px;bottom:8px;padding:4px 8px;border-radius:4px;background:rgba(253,251,247,.92);font:400 12px/16px var(--f-ui);color:var(--ink-2)}
 .tk-body{position:relative;padding:16px 8px 12px}
@@ -212,7 +212,7 @@ button:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 .tk-no{text-align:right;font:400 12px/16px var(--f-ui);color:var(--ink-2)}
 .tk-no span{display:block;font:400 13px/20px var(--f-num);color:var(--ink);font-variant-numeric:tabular-nums}
 .tk-rows{margin:0}
-.tk-rows>div{display:grid;grid-template-columns:4em 1fr;gap:12px;padding:12px 0;border-bottom:1px dotted #cfc8bc;align-items:baseline}
+.tk-rows>div{display:grid;grid-template-columns:4em 1fr;gap:12px;padding:10px 0;border-bottom:1px dotted #cfc8bc;align-items:baseline}
 .tk-rows>div:last-child{border-bottom:0}
 .tk-rows dt{font:400 13px/20px var(--f-ui);color:var(--ink-2)}
 .tk-rows dd{margin:0;min-width:0;font:500 15px/20px var(--f-ui)}
@@ -228,7 +228,7 @@ button:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 .tk-stub{background:var(--card);padding:12px 20px 16px;border-radius:0 0 4px 4px;display:grid;gap:4px;font:400 13px/20px var(--f-ui);color:var(--ink-2)}
 .tk-stub p{margin:0;display:grid;grid-template-columns:5em 1fr;gap:8px}
 .tk-stub b{font-weight:500;color:var(--ink)}
-.note{margin:0;width:min(100%,328px);text-align:center;font:400 clamp(22px,6.4vw,26px)/1.6 var(--f-hand);color:#f7f2ea;text-shadow:0 1px 8px rgba(20,14,8,.3);white-space:pre-line;opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.note{margin:0;width:min(100%,328px);text-align:center;font:400 clamp(20px,5.8vw,24px)/1.5 var(--f-hand);color:#f7f2ea;text-shadow:0 1px 8px rgba(20,14,8,.3);white-space:pre-line;opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;opacity:0;transition:opacity .5s var(--ease) .3s}
 .btn-line{height:44px;padding:0 20px;border-radius:10px;box-shadow:inset 0 0 0 1px rgba(252,251,247,.55);color:#fcfbf7;font:500 14px/44px var(--f-ui);background:rgba(252,251,247,.06);transition:background-color .15s var(--ease)}
 .btn-line:active{transform:scale(.97)}
@@ -240,6 +240,7 @@ button:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 .sheet.open{opacity:1}
 .sheet form{width:100%;display:grid;gap:16px;background:var(--surface);border-radius:16px 16px 0 0;padding:24px max(24px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 20px) max(24px,env(safe-area-inset-left,0px));transform:translateY(100%);transition:transform .35s var(--ease)}
 .sheet.open form{transform:none}
+.sheet.kb form{padding-bottom:16px;border-radius:16px}
 .sheet label{font:400 19px/28px var(--f-hand)}
 .sheet input{width:100%;font:700 24px/32px var(--f-hand);color:var(--pen);padding:8px 2px;border:0;border-bottom:1.5px solid var(--ink);border-radius:0;background:transparent;outline:none;-webkit-user-select:text;user-select:text}
 .sheet input::placeholder{color:#c9c2b7;font-weight:400}
@@ -409,7 +410,7 @@ button:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
   <div class="sheet" id="sheet" hidden>
     <form id="signForm" autocomplete="off">
       <label for="signName">在持券人欄，簽上你的名字</label>
-      <input id="signName" name="signName" maxlength="12" placeholder="你的名字" enterkeyhint="done">
+      <input id="signName" name="signName" maxlength="12" placeholder="你的名字" enterkeyhint="done" autocomplete="off" autocorrect="off" spellcheck="false">
       <div class="sheet-btns"><button type="button" class="btn-ghost" id="signSkip">不簽了，直接蓋章</button><button type="submit" class="btn-ink">簽名</button></div>
     </form>
   </div>
@@ -1158,6 +1159,19 @@ async function endOfYear(){
 }
 
 /* ================= 9. 提貨券 ================= */
+// 整張券縮放到剛好放進手機可見的高度；蓋完章再縮一點，讓留言和按鈕也在同一個畫面
+function fitTicket(){
+  if (tkStage.hidden) return '';
+  const cs = getComputedStyle(tkStage), gap = parseFloat(cs.rowGap) || 20;
+  const avail = tkStage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+  const H = ticket.offsetHeight;
+  const extra = tkStage.classList.contains('done') ? ['.note', '.actions', '.save'].reduce((s, q) => s + tkStage.querySelector(q).offsetHeight + gap, 0) : 0;
+  const s = Math.max(.5, Math.min(1, (avail - extra) / H));
+  const t = 'scale(' + s.toFixed(3) + ') rotate(-1.2deg)';
+  ticket.style.transform = t; ticket.style.marginBottom = (-(1 - s) * H).toFixed(1) + 'px';
+  return t;
+}
+addEventListener('resize', () => fitTicket());
 let signedName = store.get('done') ? (store.get('name') || '') : null;
 function putSignature(name, animate){
   const dd = $('#holder'); dd.textContent = '';
@@ -1168,35 +1182,53 @@ async function showTicket(skip){
   hint(''); app.classList.add('evening'); setStage('busy');
   if (signedName !== null) { putSignature(signedName, false); stampEl.style.opacity = '.92'; tkStage.classList.add('done'); }
   tkStage.hidden = false; tkStage.scrollTop = 0;
+  ticket.getAnimations().forEach(a => a.cancel());
+  ticket.style.transition = 'none'; ticket.style.transform = 'none'; ticket.style.marginBottom = '0px';
+  const rt = ticket.getBoundingClientRect();
+  const target = fitTicket();
+  void ticket.offsetWidth; ticket.style.transition = '';
   S.swish();
   if (!skip && !calStage.hidden) {
     // 提貨券從日曆背後抽出來
     tkStage.classList.add('behind'); calStage.classList.add('leaving');
-    const rc = cal.getBoundingClientRect(), rt = ticket.getBoundingClientRect();
+    const rc = cal.getBoundingClientRect();
     const dy0 = (rc.top + rc.height / 2) - (rt.top + rt.height / 2), dy1 = dy0 - rc.height * .62;
     anim(cal, [{ transform:'none', opacity:1 }, { transform:'translateY(16px)', opacity:1, offset:.4 }, { transform:'translateY(42%) scale(.94)', opacity:0 }], { duration:1500, easing:EASE });
     await anim(ticket, [
       { transform:'translateY(' + dy0 + 'px) scale(.8)' },
       { transform:'translateY(' + dy1 + 'px) scale(.84) rotate(-2.5deg)', offset:.42 },
-      { transform:'translateY(0) rotate(-1.2deg)' },
-    ], { duration:1700, easing:EASE });
+      { transform:target },
+    ], { duration:1700, easing:EASE, fill:'none' });
     calStage.hidden = true; tkStage.classList.remove('behind');
   } else {
     calStage.hidden = true;
-    await anim(ticket, [{ transform:'translateY(105vh) rotate(8deg)' }, { transform:'translateY(0) rotate(-1.2deg)' }], { duration:800, easing:EASE });
+    await anim(ticket, [{ transform:'translateY(105vh) rotate(8deg)' }, { transform:target }], { duration:800, easing:EASE, fill:'none' });
   }
   S.pluck(1046.5, 0, .06);
   setStage('ticket');
 }
 
 const sheet = $('#sheet'), signInput = $('#signName');
+// iPhone 的鍵盤不會把版面推上去，只會縮小「可見區域」；所以簽名框跟著可見區域走，永遠貼在鍵盤上方
+const vv = window.visualViewport;
+function fitSheet(){
+  if (sheet.hidden || !vv) return;
+  sheet.style.top = vv.offsetTop + 'px';
+  sheet.style.height = vv.height + 'px';
+  sheet.style.bottom = 'auto';
+  sheet.classList.toggle('kb', innerHeight - vv.height > 120);
+}
+if (vv) { vv.addEventListener('resize', fitSheet); vv.addEventListener('scroll', fitSheet); }
 $('#signBtn').addEventListener('click', () => {
   if (stage !== 'ticket') return;
-  sheet.hidden = false; signInput.value = '';
+  sheet.hidden = false; signInput.value = ''; fitSheet();
   try { signInput.focus({ preventScroll:true }); } catch (e) {}
-  requestAnimationFrame(() => sheet.classList.add('open'));
+  requestAnimationFrame(() => { sheet.classList.add('open'); fitSheet(); });
 });
-function closeSheet(){ signInput.blur(); sheet.classList.remove('open'); setTimeout(() => { sheet.hidden = true; }, 340); }
+function closeSheet(){
+  signInput.blur(); sheet.classList.remove('open');
+  setTimeout(() => { sheet.hidden = true; sheet.classList.remove('kb'); sheet.style.top = sheet.style.height = sheet.style.bottom = ''; }, 340);
+}
 $('#signForm').addEventListener('submit', e => { e.preventDefault(); const v = signInput.value.trim().slice(0, 12); closeSheet(); sign(v); });
 $('#signSkip').addEventListener('click', () => { closeSheet(); sign(''); });
 sheet.addEventListener('click', e => { if (e.target === sheet) closeSheet(); });
@@ -1214,10 +1246,11 @@ async function stampIt(){
   setStage('busy'); hint('');
   await anim(stampEl, [{ transform:'scale(1.12) rotate(-9deg)', opacity:.18 }, { transform:'scale(1.5) rotate(-15deg)', opacity:.1, offset:.35 }, { transform:'scale(1) rotate(-9deg)', opacity:.92 }], { duration:260, easing:'cubic-bezier(.55,0,.9,.45)' });
   S.stamp();
-  ticket.animate([{ transform:'translateY(0) rotate(-1.2deg)' }, { transform:'translateY(4px) rotate(-1.45deg)' }, { transform:'translateY(0) rotate(-1.2deg)' }], { duration:200 });
+  const t = ticket.style.transform;
+  ticket.animate([{ transform:t }, { transform:'translateY(4px) ' + t }, { transform:t }], { duration:200 });
   store.set('done', '1');
   await wait(650);
-  tkStage.classList.add('done'); S.bgmSwell(); setStage('ticket-done');
+  tkStage.classList.add('done'); fitTicket(); S.bgmSwell(); setStage('ticket-done');
 }
 ticket.addEventListener('click', () => { if (stage !== 'stamp') return; buzz([30, 60, 30, 60, 30]); stampIt(); });
 
